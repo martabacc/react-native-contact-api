@@ -17,17 +17,9 @@ class App extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      contacts: this.props.contacts,
       filterKeyword: ''
     };
-    this.onSaveContact = this.onSaveContact.bind(this);
     this.onFilterContact = this.onFilterContact.bind(this);
-  }
-
-  onSaveContact(name, email) {
-    this.setState({
-      contacts: [{ name, email }, ...this.state.contacts]
-    });
   }
 
   onFilterContact(keyword) {
@@ -35,7 +27,8 @@ class App extends Component<Props> {
   }
 
   filteredContact() {
-    const { contacts, filterKeyword } = this.state;
+    const { filterKeyword } = this.state;
+    const {contacts} = this.props;
     const keywordLowerCase = filterKeyword.toLowerCase();
     return contacts.filter((contact) => {
       const contactNameLowerCase = contact.name.toLowerCase();
@@ -48,7 +41,7 @@ class App extends Component<Props> {
       <View style={styles.container}>
         <ContactFilter onFilterContact={this.onFilterContact}/>
         <ContactList contacts={this.filteredContact()}/>
-        <ContactForm onSaveContact={this.onSaveContact}/>
+        <ContactForm/>
       </View>
     );
   }

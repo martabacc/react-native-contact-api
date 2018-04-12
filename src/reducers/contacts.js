@@ -12,12 +12,12 @@ const defaultContact = [
   { name: 'Father of Kim', email: 'mail@gmail.com' }
 ];
 
-const contacts = ( state = defaultContact, action ) => {
+const contacts = ( state = defaultContact, action) => {
   switch(action.type){
     case 'ADD_CONTACT':
       return [
-          ...state,
-          action.payload
+          action.newContact,
+          ...state
       ]
     default:
       return state

@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
+import styles from './Button.style';
 
 export default class Button extends Component {
   render() {
@@ -21,21 +22,3 @@ export default class Button extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    minWidth: 60,
-    alignItems: 'center',
-    marginLeft: 4,
-    borderRadius: 5,
-    backgroundColor: '#ffffff20'
-  },
-  buttonText: {
-    flex: 1,
-    fontWeight: 'bold',
-    fontSize: 14,
-    textAlign: 'center',
-    color: 'white'
-  }
-});

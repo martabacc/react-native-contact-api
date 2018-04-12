@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  TextInput,
-  View
-} from 'react-native';
-import Button from './Button';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { TextInput, View } from 'react-native';
+import Button from './Button';
+import {connect} from 'react-redux';
+import styles from './ContactForm.style';
+import { addTodo } from '../actions/contacts';
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      emailL: ''
+      email: '',
     };
     this._saveContact = this._saveContact.bind(this);
     this._onChangeName = this._onChangeName.bind(this);
@@ -28,65 +27,49 @@ export default class ContactForm extends Component {
   }
 
   _saveContact() {
-    const { onSaveContact } = this.props;
-    const { name, email } = this.state;
-    if (!name || !email) {
-      return;
-    }
-    onSaveContact(name, email);
+    const {dispatch} = this.props;
+    const {name, email} = this.state;
+    dispatch(addTodo(name, email));
     this.setState({ name: '', email: '' });
   }
 
   render() {
     return (
-      <View
-        style={styles.container}
-      >
-        <TextInput
-          style={styles.input}
-          placeholder='Name'
-          autoCorrection={false}
-          value={this.state.name}
-          placeholderTextColor='white'
-          onChangeText={this._onChangeName}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Email'
-          autoCorrection={false}
-          autoCapitalize='none'
-          value={this.state.email}
-          placeholderTextColor='white'
-          onChangeText={this._onChangeEmail}
-        />
-        <Button
-          onPress={this._saveContact}
-          value='Save'
-        />
-      </View>
+        <View
+            style={styles.container}
+        >
+          <TextInput
+              style={styles.input}
+              placeholder="Name"
+              autoCorrection={false}
+              value={this.state.name}
+              placeholderTextColor="white"
+              onChangeText={this._onChangeName}
+          />
+          <TextInput
+              style={styles.input}
+              placeholder="Email"
+              autoCorrection={false}
+              autoCapitalize="none"
+              value={this.state.email}
+              placeholderTextColor="white"
+              onChangeText={this._onChangeEmail}
+          />
+          <Button
+              onPress={this._saveContact}
+              value="Save"
+          />
+        </View>
     );
   }
 }
 
-ContactForm.propTypes = {
-  onSaveContact: PropTypes.func.isRequired
-};
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 8,
-    flexDirection: 'row',
-    backgroundColor: '#3F3E4F',
-  },
-  input: {
-    flex: 2,
-    height: 35,
-    borderRadius: 5,
-    backgroundColor: '#ffffff20',
-    marginLeft: 3,
-    paddingLeft: 5,
-    paddingRight: 5,
-    marginRight: 3,
-    color: 'white',
+const mapDispatchToProps = (dispatch) => ({
+  addContact: newContact => {
+    dispatch(addTodo(newContact));
   }
 });
+
+export default connect()(ContactForm);
+
+
