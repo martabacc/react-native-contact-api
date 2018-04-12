@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './src/components/App';
+import Defak from './src/components/Defak';
 
-AppRegistry.registerComponent('helloRN', () => App);
+AppRegistry.registerComponent('helloRN', () => Defak);

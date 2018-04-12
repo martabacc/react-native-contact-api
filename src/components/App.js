@@ -7,15 +7,21 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ContactList from './ContactsList';
+import { createStore } from 'redux';
+import {Provider} from 'react-redux';
 import ContactForm from './ContactForm';
 import ContactFilter from './ContactFilter';
 import PropTypes from 'prop-types';
+import rootReducers from '../reducers';
+import {connect} from 'react-redux';
+
+//create store
+const store = createStore(rootReducers);
 
 type Props = {};
-export default class App extends Component<Props> {
+class App extends Component<Props> {
   constructor(props) {
     super(props);
-    //console.disableYellowBox = true;
     this.state = {
       contacts: this.props.contacts,
       filterKeyword: ''
@@ -65,19 +71,16 @@ App.propTypes = {
 
 App.defaultProps = {
   contacts: [
-    { name: 'Dhivya', email: 'raj.dhivya@gmail.com' },
-    { name: 'DP', email: 'hsdpal@gmail.com' },
-    { name: 'Neel', email: 'vascodagama1@gmail.com' },
-    { name: 'Cheetan', email: 'mail@chetankothari.in' },
-    { name: 'Dewa', email: 'awidiya.dewa@gmail.com' },
-    { name: 'Kim', email: 'mail@gmail.com' },
-    { name: 'Other Kim', email: 'mail@gmail.com' },
-    { name: 'Another Kim', email: 'mail@gmail.com' },
-    { name: 'Friend of Kim', email: 'mail@gmail.com' },
-    { name: 'Mother of Kim', email: 'mail@gmail.com' },
-    { name: 'Father of Kim', email: 'mail@gmail.com' }
+    { name: 'Should not be shown', email: 'aaa@aaa.com' },
   ]
 };
+
+const mapStateToProps = (state) => ({
+  contacts: state.contacts
+});
+
+export default connect(mapStateToProps)(App);
+
 
 const styles = StyleSheet.create({
   container: {
