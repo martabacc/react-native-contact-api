@@ -5,18 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import ContactList from './ContactsList';
-import { createStore } from 'redux';
-import {Provider} from 'react-redux';
-import ContactForm from './ContactForm';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import styles from './App.style';
 import ContactFilter from './ContactFilter';
-import PropTypes from 'prop-types';
-import rootReducers from '../reducers';
-import {connect} from 'react-redux';
-
-//create store
-const store = createStore(rootReducers);
+import ContactForm from './ContactForm';
+import ContactList from './ContactsList';
 
 type Props = {};
 class App extends Component<Props> {
@@ -60,32 +54,9 @@ class App extends Component<Props> {
   }
 }
 
-const contact = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-});
-
-App.propTypes = {
- contacts: PropTypes.arrayOf(contact)
-};
-
-App.defaultProps = {
-  contacts: [
-    { name: 'Should not be shown', email: 'aaa@aaa.com' },
-  ]
-};
-
 const mapStateToProps = (state) => ({
   contacts: state.contacts
 });
 
 export default connect(mapStateToProps)(App);
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#454353'
-  }
-});
