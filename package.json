@@ -1,0 +1,35 @@
+{
+  "name": "helloRN",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "md5": "^2.2.1",
+    "prop-types": "^15.6.1",
+    "react": "16.3.0-alpha.1",
+    "react-dom": "^16.2.0",
+    "react-native": "0.54.0",
+    "react-redux": "^5.0.7"
+  },
+  "devDependencies": {
+    "babel-jest": "22.4.1",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.2",
+    "react-test-renderer": "16.3.0-alpha.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jsdom": "^11.6.2",
+    "react-native-mock": "^0.3.1",
+    "react-native-mock-render": "0.0.19"
+  },
+  "jest": {
+    "preset": "react-native",
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "./setupTests.js"
+    ]
+  }
+}
