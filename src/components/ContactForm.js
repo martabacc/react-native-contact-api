@@ -27,9 +27,9 @@ class ContactForm extends Component {
   }
 
   _saveContact() {
-    const {dispatch} = this.props;
+    const {addContact} = this.props;
     const {name, email} = this.state;
-    dispatch(addTodo(name, email));
+    addContact(name, email);
     this.setState({ name: '', email: '' });
   }
 
@@ -65,11 +65,11 @@ class ContactForm extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addContact: newContact => {
-    dispatch(addTodo(newContact));
+  addContact: (name, email) => {
+    dispatch(addTodo(name, email));
   }
 });
 
-export default connect()(ContactForm);
+export default connect(null, mapDispatchToProps)(ContactForm);
 
 
