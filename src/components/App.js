@@ -28,7 +28,7 @@ class App extends Component<Props> {
 
   filteredContact() {
     const { filterKeyword } = this.state;
-    const {contacts} = this.props;
+    const { contacts } = this.props;
     const keywordLowerCase = filterKeyword.toLowerCase();
     return contacts.filter((contact) => {
       const contactNameLowerCase = contact.name.toLowerCase();

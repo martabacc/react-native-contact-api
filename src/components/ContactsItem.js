@@ -11,6 +11,7 @@ import md5 from 'md5';
 import {connect} from 'react-redux';
 import styles from './ContactsItem.style';
 import {deleteContact} from '../actions/contacts';
+import {pingContact} from '../actions/ping';
 
 /**
  * Showing contact item
@@ -23,15 +24,15 @@ class ContactItem extends Component {
   }
 
   deleteContact(){
-    const {name} = this.props;
-    return this.props.deleteContact(name);
+    const {name, deleteContact} = this.props;
+    return deleteContact(name);
   }
 
   pingContact(){
-    Alert.alert(
-        'test',
-        'My Alert Msg');
+    const {pingContact, name} = this.props;
+    return pingContact(name);
   }
+
   render() {
     const {name, email, pinged} = this.props;
     return (
@@ -52,7 +53,7 @@ class ContactItem extends Component {
           <Text
             style={styles.contactName}
           >
-            {name} { pinged? 'PINGED!' : '' }
+            {name} Ping Count : {pinged}
           </Text>
 
           <Button value={'Delete'} onPress={this.deleteContact} />
@@ -64,7 +65,8 @@ class ContactItem extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteContact: name => dispatch(deleteContact(name))
+  deleteContact: name => dispatch(deleteContact(name)),
+  pingContact: name => dispatch(pingContact(name))
 });
 
 export default connect(null, mapDispatchToProps)(ContactItem);

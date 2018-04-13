@@ -6,11 +6,21 @@
 
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore , applyMiddleware } from 'redux';
 import rootReducers from '../reducers';
 import App from './App';
+import createSagaMiddleware from 'redux-saga'
+import {watchPing} from '../sagas';
 //create store
-const store = createStore(rootReducers);
+
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+    rootReducers,
+    applyMiddleware(sagaMiddleware)
+);
+
+
+sagaMiddleware.run(watchPing);
 
 export default class Defak extends Component<Props> {
   render() {
