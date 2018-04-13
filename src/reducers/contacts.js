@@ -1,22 +1,22 @@
 const defaultContact = [
-  { name: 'Dhivya', email: 'raj.dhivya@gmail.com' },
-  { name: 'DP', email: 'hsdpal@gmail.com' },
-  { name: 'Neel', email: 'vascodagama1@gmail.com' },
-  { name: 'Cheetan', email: 'mail@chetankothari.in' },
-  { name: 'Dewa', email: 'awidiya.dewa@gmail.com' },
-  { name: 'Kim', email: 'mail@gmail.com' },
-  { name: 'Other Kim', email: 'mail@gmail.com' },
-  { name: 'Another Kim', email: 'mail@gmail.com' },
-  { name: 'Friend of Kim', email: 'mail@gmail.com' },
-  { name: 'Mother of Kim', email: 'mail@gmail.com' },
-  { name: 'Father of Kim', email: 'mail@gmail.com' }
+  { name: 'Dhivya', email: 'raj.dhivya@gmail.com' , pinged: false},
+  { name: 'DP', email: 'hsdpal@gmail.com' , pinged: false},
+  { name: 'Neel', email: 'vascodagama1@gmail.com' , pinged: false},
+  { name: 'Cheetan', email: 'mail@chetankothari.in', pinged: false },
+  { name: 'Dewa', email: 'awidiya.dewa@gmail.com' , pinged: false},
+  { name: 'Kim', email: 'mail@gmail.com' , pinged: true},
+  { name: 'Other Kim', email: 'mail@gmail.com' , pinged: true},
+  { name: 'Another Kim', email: 'mail@gmail.com' , pinged: true},
+  { name: 'Friend of Kim', email: 'mail@gmail.com' , pinged: true},
+  { name: 'Mother of Kim', email: 'mail@gmail.com' , pinged: false},
+  { name: 'Father of Kim', email: 'mail@gmail.com' , pinged: false}
 ];
 
 const contacts = ( state = defaultContact, action) => {
   switch(action.type){
     case 'ADD_CONTACT':
       return [
-          action.newContact,
+        { ...action.newContact, pinged: false },
           ...state
       ];
     case 'DELETE_CONTACT':

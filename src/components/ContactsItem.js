@@ -3,6 +3,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Alert,
   Image
 } from 'react-native';
 import Button from './Button';
@@ -18,14 +19,21 @@ class ContactItem extends Component {
   constructor(props){
     super(props);
     this.deleteContact = this.deleteContact.bind(this);
+    this.pingContact = this.pingContact.bind(this);
   }
 
   deleteContact(){
     const {name} = this.props;
     return this.props.deleteContact(name);
   }
+
+  pingContact(){
+    Alert.alert(
+        'test',
+        'My Alert Msg');
+  }
   render() {
-    const {name, email} = this.props;
+    const {name, email, pinged} = this.props;
     return (
       <TouchableOpacity
         style={styles.containerRoot}
@@ -44,10 +52,11 @@ class ContactItem extends Component {
           <Text
             style={styles.contactName}
           >
-            {name}
+            {name} { pinged? 'PINGED!' : '' }
           </Text>
 
           <Button value={'Delete'} onPress={this.deleteContact} />
+          <Button value={'Ping'} onPress={this.pingContact} />
         </View>
       </TouchableOpacity>
     );
