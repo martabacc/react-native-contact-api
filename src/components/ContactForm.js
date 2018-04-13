@@ -4,7 +4,7 @@ import { TextInput, View } from 'react-native';
 import Button from './Button';
 import {connect} from 'react-redux';
 import styles from './ContactForm.style';
-import { addTodo } from '../actions/contacts';
+import { addContact } from '../actions/contacts';
 
 class ContactForm extends Component {
   constructor(props) {
@@ -66,7 +66,7 @@ class ContactForm extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addContact: (name, email) => {
-    dispatch(addTodo(name, email));
+    dispatch(addContact(name, email));
   }
 });
 

@@ -18,7 +18,9 @@ const contacts = ( state = defaultContact, action) => {
       return [
           action.newContact,
           ...state
-      ]
+      ];
+    case 'DELETE_CONTACT':
+      return state.filter( (contact, i) => contact.name !== action.name )
     default:
       return state
   }

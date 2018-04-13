@@ -2,18 +2,28 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
   Image
 } from 'react-native';
+import Button from './Button';
 import md5 from 'md5';
-import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import styles from './ContactsItem.style';
+import {deleteContact} from '../actions/contacts';
 
 /**
  * Showing contact item
  */
-export default class ContactItem extends Component {
+class ContactItem extends Component {
+  constructor(props){
+    super(props);
+    this.deleteContact = this.deleteContact.bind(this);
+  }
+
+  deleteContact(){
+    const {name} = this.props;
+    return this.props.deleteContact(name);
+  }
   render() {
     const {name, email} = this.props;
     return (
@@ -36,13 +46,16 @@ export default class ContactItem extends Component {
           >
             {name}
           </Text>
+
+          <Button value={'Delete'} onPress={this.deleteContact} />
         </View>
       </TouchableOpacity>
     );
   }
 }
 
-ContactItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-};
+const mapDispatchToProps = (dispatch) => ({
+  deleteContact: name => dispatch(deleteContact(name))
+});
+
+export default connect(null, mapDispatchToProps)(ContactItem);
